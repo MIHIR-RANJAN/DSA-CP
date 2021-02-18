@@ -1,0 +1,206 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2576
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\froman\fcharset0 Times-Bold;
+\f3\froman\fcharset0 Times-Roman;\f4\fmodern\fcharset0 Courier;\f5\fswiss\fcharset0 ArialMT;
+\f6\fswiss\fcharset0 Arial-BoldMT;\f7\fnil\fcharset0 HelveticaNeue;\f8\fnil\fcharset134 PingFangSC-Regular;
+\f9\fnil\fcharset134 STSongti-SC-Regular;\f10\fnil\fcharset0 Verdana;\f11\fnil\fcharset134 STSongti-SC-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red49\green50\blue61;\red255\green255\blue255;\red0\green0\blue0;
+\red24\green25\blue27;\red62\green62\blue62;\red204\green201\blue205;\red226\green226\blue226;}
+{\*\expandedcolortbl;;\cssrgb\c25098\c25882\c30588;\cssrgb\c100000\c100000\c100000;\cssrgb\c0\c0\c0;
+\cssrgb\c12549\c12941\c14118;\cssrgb\c30980\c30980\c30980;\cssrgb\c83922\c82745\c83922;\cssrgb\c90980\c90980\c90980;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11560\viewh14780\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs50 \cf0 DEBUGGING ( STRATEGY)\
+\
+
+\fs40 1. Use print statement to see execution of each process.\
+\pard\pardeftab720\sa200\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+2. SATANDARD ERROR STREAM (SES)\
+\pard\pardeftab720\sa200\partightenfactor0
+
+\f1\b0\fs34 \cf2 SES means using \'93
+\f0\b cerr
+\f1\b0 \'94 for output in place of \'93
+\f0\b cout
+\f1\b0 \'94.
+\f0\b\fs40 \
+3. ADDRESS SANITIZER(RUN TIME ERROR)\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf4 \cb1 4. Possible Pitfall: Simply Compiling Code Mentally\
+5. Possible Pitfall: Rewriting the Program\
+
+\f1\b0\fs36 \cf2 \cb3 \
+DO NOT DELETE PREVIOUS PROGRAM. ALWAYS MAKE EXTRA COPIES.
+\f0\b\fs40 \
+\pard\pardeftab720\sa200\partightenfactor0
+\cf2 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \cb1 \kerning1\expnd0\expndtw0 1. Use print statement to see execution of each process\
+
+\f1\b0\fs34 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\sa200\partightenfactor0
+
+\f0\b\fs40 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\b0\fs32 \cf4 \expnd0\expndtw0\kerning0
+#include <iostream>\
+using namespace std; \
+\
+int x = 10; // some important variable\
+\
+inline void dbg() \{ cout << "x is " << x << "\\n"; \}\
+\
+int main() \{\
+dbg(); \
+x = 5000; \
+dbg(); \
+\}\
+\
+Out- x is 10 \
+        X is 5000\
+\
+INLINE FUNCT:\
+\
+\pard\pardeftab720\sa200\partightenfactor0
+
+\f1\fs34 \cf2 \cb3 C++ provides an inline functions to reduce the function call overhead. Inline function is a function that is expanded in line when it is called. When the inline function is called whole code of the inline function gets inserted or substituted at the point of inline function call. This substitution is performed by the C++ compiler at compile time. Inline function may increase efficiency if it is small.\cb1 \uc0\u8232 \cb3 The syntax for defining the function inline is:\
+\pard\pardeftab720\partightenfactor0
+
+\f4\fs32 \cf4 \cb1 inline return-type function-name(parameters)\
+\{\
+    // function code\
+\}  \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs34 \cf2 \cb3 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\pard\pardeftab720\sa200\partightenfactor0
+\cf2 Remember, inlining is only a request to the compiler, not a command. Compiler can ignore the request for inlining. Compiler may not perform inlining in such circumstances like:\cb1 \uc0\u8232 \cb3 1) If a function contains a loop. (for, while, do-while)\cb1 \uc0\u8232 \cb3 2) If a function contains static variables.\cb1 \uc0\u8232 \cb3 3) If a function is recursive.\cb1 \uc0\u8232 \cb3 4) If a function return type is other than void, and the return statement doesn\'92t exist in function body.\cb1 \uc0\u8232 \cb3 5) If a function contains switch or goto statement.\
+\pard\pardeftab720\sa200\partightenfactor0
+
+\f0\b \cf2 Inline functions provide following advantages:
+\f1\b0 \cb1 \uc0\u8232 \cb3 1) Function call overhead doesn\'92t occur.\cb1 \uc0\u8232 \cb3 2) It also saves the overhead of push/pop variables on the stack when function is called.\cb1 \uc0\u8232 \cb3 3) It also saves overhead of a return call from a function.\cb1 \uc0\u8232 \cb3 4) When you inline a function, you may enable compiler to perform context specific optimization on the body of function. Such optimizations are not possible for normal function calls. Other optimizations can be obtained by considering the flows of calling context and the called context.\cb1 \uc0\u8232 \cb3 5) Inline function may be useful (if it is small) for embedded systems because inline can yield less code than the function call preamble and return.\
+
+\f0\b Inline function disadvantages:
+\f1\b0 \cb1 \uc0\u8232 \cb3 1) The added variables from the inlined function consumes additional registers, After in-lining function if variables number which are going to use register increases than they may create overhead on register variable resource utilization. This means that when inline function body is substituted at the point of function call, total number of variables used by the function also gets inserted. So the number of register going to be used for the variables will also get increased. So if after function inlining variable numbers increase drastically then it would surely cause an overhead on register utilization.\
+2) If you use too many inline functions then the size of the binary executable file will be large, because of the duplication of same code.\
+3) Too much inlining can also reduce your instruction cache hit rate, thus reducing the speed of instruction fetch from that of cache memory to that of primary memory.\
+4) Inline function may increase compile time overhead if someone changes the code inside the inline function then all the calling location has to be recompiled because compiler would require to replace all the code once again to reflect the changes, otherwise it will continue with old functionality.\
+5) Inline functions may not be useful for many embedded systems. Because in embedded systems code size is more important than speed.\
+6) Inline functions might cause thrashing because inlining might increase size of the binary executable file. Thrashing in memory causes performance of computer to degrade.\
+
+\f0\b\fs40 \
+2. SATANDARD ERROR STREAM (SES)
+\f1\b0\fs34 \
+SES means using \'93
+\f0\b cerr
+\f1\b0 \'94 for output in place of \'93
+\f0\b cout
+\f1\b0 \'94.\
+\pard\pardeftab720\partightenfactor0
+
+\f5\fs32 \cf5 Use\'a0
+\f6\b cout
+\f5\b0 \'a0for the standard output. \
+Use\'a0
+\f6\b cerr
+\f5\b0 \'a0to show errors. \
+Use
+\f6\b  clog
+\f5\b0  for logging
+\f1\fs34 \cf2 \
+\pard\pardeftab720\sa200\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf4 \cb1 inline void dbg() \{ cerr << "x is " << x << endl; \}\
+\
+int main() \{\
+dbg(); \
+x = 5000; \
+dbg(); \
+\}\
+\pard\pardeftab720\sa200\partightenfactor0
+
+\f1 \cf2 \cb3 \
+\pard\pardeftab720\sl520\sa320\qj\partightenfactor0
+
+\f7\fs32 \cf6 \cb1 1
+\f8 \'a1\'a2
+\f9 cout is output after buffering,
+\f10 \cb7 The default is the display. This is a buffered output,
+\f9 \cb1 It is standard output and can be redirected (refer to the following example for the meaning of redirection);
+\f7 \
+\pard\pardeftab720\sl460\sa320\qj\partightenfactor0
+
+\f9 \cf6 2. The cerr is directly output without buffering, and is generally used to quickly output error information, which is a standard error.
+\f10 \cb7 By default, it is connected to the standard output stream, but it is not buffered, which means that the error message can be sent directly to the display without waiting for the buffer or a new line break. Generally not redirected
+\f9 \cb1 (Redirection seems to be controversial. Some people say that it is related to the system.
+\f7 \
+\
+\pard\pardeftab720\sl520\sa320\qj\partightenfactor0
+\cf6 \
+\pard\pardeftab720\sl400\sa320\partightenfactor0
+
+\f11\b \cf6 \cb8 For why there is cerr 
+\f9\b0 \
+\'a1\'a1\'a1\'a1 For example, your program encounters the threat of running out of call stack (infinite, no exit recursion).\
+\'a1\'a1\'a1\'a1You said, where do you borrow memory to store your error messages?\
+\'a1\'a1\'a1\'a1 So there was cerr. Its purpose is to be supported by the output function in emergency situations where you need it most.\
+\'a1\'a1\'a1\'a1 The purpose of the buffer is to reduce the number of screen refreshes\'a1\'aafor example, your program outputs an article in the Bible. Without buffering, every time a letter is written, a letter is output and the screen is swiped. With buffering, you will see several sentences "simultaneously" appear on the screen (from memory to video memory, and then refresh the screen).\
+\pard\pardeftab720\sa200\partightenfactor0
+
+\f1\fs34 \cf2 \cb3 \
+\
+\pard\pardeftab720\sa200\partightenfactor0
+
+\f0\b\fs40 \cf2 3. ADDRESS SANITIZER(RUN TIME ERROR)\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b0\fs36 \cf4 \cb1 -ggdb -fsanitize=address,undefined \
+\
+This part will cover later\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b\fs40 \cf4 4. Possible Pitfall: Simply Compiling Code Mentally\
+
+\f0 \cf2 \cb3 \
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f3\b0\fs36 \cf4 \cb1 Many beginners are convinced that they can compile the code line by line in their head to notice the error. This is actually a very advanced technique of debugging in that it takes great skill to master! Sure, a beginner may catch a missing semicolon, but most beginners will have their judgment clouded by their perceptions in the language, which may be behind the very problem. \
+Even those who are experienced may waste time trying to do this, even if they have higher chances of locating the problem as such. \
+Concisely, resort to mental compilation when you are more experienced and are not left with other options. Otherwise, print statements are enough to get around wrong answers (incorrect results), with address sanitizers around faulty results
+\fs24 !\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b\fs40 \cf4 5. Possible Pitfall: Rewriting the Program\
+\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f3\b0\fs36 \cf4 Rewriting the program is sometimes a good idea, but remember to keep track of time! It is very easy to get carried away rewriting even parts of a program that are bug-free in obsessive hope that something might come through. \
+Do NOT delete your previous program. Make a new file! \
+If the problem is with the program's implementation of your logic and not your logic itself, it is usually better to fix the program directly. \
+Again, 
+\f2\b always make extra copies!!
+\f3\b0\fs24 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \
+\pard\pardeftab720\sa200\partightenfactor0
+
+\f1\fs34 \cf2 \cb3 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf4 \cb1 \
+\
+}
