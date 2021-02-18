@@ -1,5 +1,5 @@
 /*
-Farmer John's cows have been holding a daily online gathering on the "mooZ" video meeting platform. For fun, they have invented a 
+Q - Farmer John's cows have been holding a daily online gathering on the "mooZ" video meeting platform. For fun, they have invented a 
 simple number game to play during the meeting to keep themselves entertained.
 Elsie has three positive integers A, B, and C (A≤B≤C). These integers are supposed to be secret, so she will not directly reveal 
 them to her sister Bessie. Instead, she gives Bessie seven (not necessarily distinct) integers in the range 1…109, claiming that 
