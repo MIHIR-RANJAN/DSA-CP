@@ -1,18 +1,21 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2576
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fmodern\fcharset0 CourierNewPSMT;\f2\fnil\fcharset0 Verdana;
-\f3\fswiss\fcharset0 Helvetica;\f4\fnil\fcharset0 Monaco;\f5\fnil\fcharset0 Verdana-Italic;
+\f3\fswiss\fcharset0 Helvetica;\f4\fmodern\fcharset0 CourierNewPS-BoldMT;\f5\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;
+\f6\fnil\fcharset0 Menlo-Regular;\f7\fnil\fcharset0 Monaco;\f8\fnil\fcharset0 Verdana-Italic;
 }
 {\colortbl;\red255\green255\blue255;\red15\green112\blue1;\red255\green255\blue255;\red0\green0\blue0;
-\red146\green26\blue32;\red234\green234\blue234;\red168\green72\blue4;\red219\green219\blue219;\red247\green247\blue247;
+\red146\green26\blue32;\red234\green234\blue234;\red255\green255\blue255;\red14\green18\blue29;\red255\green255\blue255;
+\red89\green138\blue67;\red202\green202\blue202;\red168\green72\blue4;\red219\green219\blue219;\red247\green247\blue247;
 \red107\green0\blue109;\red10\green86\blue216;\red3\green53\blue197;\red38\green38\blue38;\red1\green30\blue103;
 \red159\green159\blue159;\red94\green224\blue89;\red192\green0\blue4;\red241\green241\blue241;\red16\green121\blue2;
 }
 {\*\expandedcolortbl;;\cssrgb\c0\c50196\c0;\cssrgb\c100000\c100000\c100000;\cssrgb\c0\c0\c0;
-\cssrgb\c64706\c16471\c16471;\cssrgb\c93333\c93333\c93333;\cssrgb\c72157\c36078\c0;\cssrgb\c88627\c88627\c88627;\cssrgb\c97647\c97647\c97647;
+\cssrgb\c64706\c16471\c16471;\cssrgb\c93333\c93333\c93333;\cssrgb\c100000\c100000\c100000\c87059;\cssrgb\c6667\c9412\c15294;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c41569\c60000\c33333;\cssrgb\c83137\c83137\c83137;\cssrgb\c72157\c36078\c0;\cssrgb\c88627\c88627\c88627;\cssrgb\c97647\c97647\c97647;
 \cssrgb\c50196\c0\c50196;\cssrgb\c0\c43529\c87843;\cssrgb\c0\c30588\c81569;\cssrgb\c20000\c20000\c20000;\cssrgb\c0\c17647\c47843;
 \cssrgb\c68627\c68627\c68627;\cssrgb\c42353\c88627\c42353;\cssrgb\c80784\c0\c0;\cssrgb\c95686\c95686\c95686;\cssrgb\c0\c53333\c0;
 }
-\paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh14780\viewkind0
+\paperw11900\paperh16840\margl1440\margr1440\vieww10160\viewh18000\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\b\fs50 \cf0 DEBUGGING TACTICS\
@@ -55,15 +58,127 @@ Use : assert(<condition that will never happen>)\
 \
 \pard\pardeftab720\partightenfactor0
 
-\f1\b0 \cf4 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec4 static_assert(condition, diagnostic_message)
-\fs26 \
+\f1\b0 \cf4 static_assert(condition, diagnostic_message)\
+\
+\
+
+\f4\b\fs40 #5: SANITIZER COMMANDS:AND DEBUGGING\
 \pard\pardeftab720\partightenfactor0
 
-\f0\b\fs36 \cf4 \expnd0\expndtw0\kerning0
+\f5\b0\fs36 \cf7 \cb8 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec7 @1 - \'93g++ sanitizer.cpp -o prog -fsanitize=undefined && ./prog \'93\cb9 \
+
+\fs21 \
+\cf4 UndefinedBehaviorSanitizer:DEADLYSIGNAL\
+==14490==ERROR: UndefinedBehaviorSanitizer: SEGV on unknown address 0xfffffffffffffffc (pc 0x00010da53bc0 bp 0x7ffee21ad8d0 sp 0x7ffee21ad880 T375920)\
+==14490==The signal is caused by a READ memory access.\
+    #0 0x10da53bc0 in main+0xf0 (prog:x86_64+0x100001bc0)\
+    #1 0x7fff2035c630 in start+0x0 (libdyld.dylib:x86_64+0x15630)\
+\
+==14490==Register values:\
+rax = 0xfffffffffffffffc  rbx = 0x0000000000000000  rcx = 0x0000000000000001  rdx = 0x0000000000000000  \
+rdi = 0xfffffffffffffffc  rsi = 0xfffffffffffffffc  rbp = 0x00007ffee21ad8d0  rsp = 0x00007ffee21ad880  \
+ r8 = 0x0000000000000001   r9 = 0x0000000000000001  r10 = 0x00007fff88a899f8  r11 = 0x00007fff2030706a  \
+r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000000  r15 = 0x0000000000000000  \
+UndefinedBehaviorSanitizer can not provide additional info.\
+SUMMARY: UndefinedBehaviorSanitizer: SEGV (prog:x86_64+0x100001bc0) in main+0xf0\
+==14490==ABORTING\
+zsh: abort      ./prog
+\f1\fs26 \cf4 \cb3 \expnd0\expndtw0\kerning0
 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\b\fs36 \cf4 \
+\cf9 \cb4 @2 - \'93g++ -fsanitize=undefined runError.cpp -o prog && ./prog\'94\cf4 \cb3 \
+
+\fs20 runError.cpp:5:12: warning: shift count >= width of type [-Wshift-count-overflow]\
+        cout << (1<<32) << endl;\
+                  ^ ~~\
+runError.cpp:6:12: warning: shift count >= width of type [-Wshift-count-overflow]\
+        cout << (1<<32) << endl;\
+                  ^ ~~\
+runError.cpp:7:12: warning: shift count >= width of type [-Wshift-count-overflow]\
+        cout << (1<<32) << endl;\
+                  ^ ~~\
+3 warnings generated.\
+runError.cpp:5:12: runtime error: shift exponent 32 is too large for 32-bit type 'int'\
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior runError.cpp:5:12 in \
+165732224\
+runError.cpp:6:12: runtime error: shift exponent 32 is too large for 32-bit type 'int'\
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior runError.cpp:6:12 in \
+165732224\
+runError.cpp:7:12: runtime error: shift exponent 32 is too large for 32-bit type 'int'\
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior runError.cpp:7:12 in \
+165732224\
 \
+
+\fs36 \cf9 \cb4 @3- \'93g++ -fsanitize=undefined -fno-sanitize-recover runError.cpp -o prog && ./prog\'94\cf4 \cb3 \
+
+\fs20 clang: warning: argument '-fno-sanitize-recover' is deprecated, use '-fno-sanitize-recover=undefined,integer' or '-fno-sanitize-recover=all' instead [-Wdeprecated]\
+runError.cpp:5:12: warning: shift count >= width of type [-Wshift-count-overflow]\
+        cout << (1<<32) << endl;\
+                  ^ ~~\
+runError.cpp:6:12: warning: shift count >= width of type [-Wshift-count-overflow]\
+        cout << (1<<32) << endl;\
+                  ^ ~~\
+runError.cpp:7:12: warning: shift count >= width of type [-Wshift-count-overflow]\
+        cout << (1<<32) << endl;\
+                  ^ ~~\
+3 warnings generated.\
+runError.cpp:5:12: runtime error: shift exponent 32 is too large for 32-bit type 'int'\
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior runError.cpp:5:12 in \
+zsh: abort      ./prog\
 \
+
+\fs36 \cf9 \cb4 @4 - g++ sanitizer.cpp -o prog -fsanitize=address && ./prog
+\fs20 \cf4 \cb3 \
+AddressSanitizer:DEADLYSIGNAL\
+=================================================================\
+==14960==ERROR: AddressSanitizer: SEGV on unknown address (pc 0x00010dd2499e bp 0x7ffee1edd8d0 sp 0x7ffee1edd7c0 T0)\
+==14960==The signal is caused by a READ memory access.\
+==14960==Hint: this fault was caused by a dereference of a high value address (see register values below).  Dissassemble the provided pc to learn which register was used.\
+    #0 0x10dd2499e in main+0x10e (prog:x86_64+0x10000299e)\
+    #1 0x7fff2035c630 in start+0x0 (libdyld.dylib:x86_64+0x15630)\
+\
+==14960==Register values:\
+rax = 0xfffffffffffffffc  rbx = 0x00007ffee1edd820  rcx = 0x1fffffffffffffff  rdx = 0x0000100000000000  \
+rdi = 0x00007ffee1edd7e0  rsi = 0xffffffffffffffff  rbp = 0x00007ffee1edd8d0  rsp = 0x00007ffee1edd7c0  \
+ r8 = 0x00001fffdc3dbac0   r9 = 0x00007ffee1edd7e0  r10 = 0x00007ffee1edd7e0  r11 = 0x0000000000000000  \
+r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000000  r15 = 0x0000000000000000  \
+AddressSanitizer can not provide additional info.\
+SUMMARY: AddressSanitizer: SEGV (prog:x86_64+0x10000299e) in main+0x10e\
+==14960==ABORTING\
+zsh: abort      ./prog\
+\
+
+\fs36 \cf9 \cb4 @5 - g++ sanitizer.cpp -o prog -fsanitize=address -g && ./prog
+\fs20 \cf4 \cb3 \
+AddressSanitizer:DEADLYSIGNAL\
+=================================================================\
+==15190==ERROR: AddressSanitizer: SEGV on unknown address (pc 0x00010ab9a97e bp 0x7ffee50678d0 sp 0x7ffee50677c0 T0)\
+==15190==The signal is caused by a READ memory access.\
+==15190==Hint: this fault was caused by a dereference of a high value address (see register values below).  Dissassemble the provided pc to learn which register was used.\
+    #0 0x10ab9a97e in main sanitizer.cpp:5\
+    #1 0x7fff2035c630 in start+0x0 (libdyld.dylib:x86_64+0x15630)\
+\
+==15190==Register values:\
+rax = 0xfffffffffffffffc  rbx = 0x00007ffee5067820  rcx = 0x1fffffffffffffff  rdx = 0x0000100000000000  \
+rdi = 0x00007ffee50677e0  rsi = 0xffffffffffffffff  rbp = 0x00007ffee50678d0  rsp = 0x00007ffee50677c0  \
+ r8 = 0x00001fffdca0cec0   r9 = 0x00007ffee50677e0  r10 = 0x00007ffee50677e0  r11 = 0x0000000000000000  \
+r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000000  r15 = 0x0000000000000000  \
+AddressSanitizer can not provide additional info.\
+SUMMARY: AddressSanitizer: SEGV sanitizer.cpp:5 in main\
+==15190==ABORTING\
+zsh: abort      ./prog\
+
+\fs36 \
+\cf9 \cb4 @5 - 
+\f6\b0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec10 g++ sanitizer.cpp -o prog -D_GLIBCXX_DEBUG && ./prog
+\fs24 \cf11 \cb1 \strokec11 \
+
+\f0\b\fs36 \cf4 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \
 \pard\pardeftab720\partightenfactor0
 
 \fs42 \cf4 #2: EXPLANATION
@@ -74,20 +189,20 @@ Use : assert(<condition that will never happen>)\
 \f2\b0\fs26 \cf4 Let\'92s add some debugging statements to these functions:\
 \pard\pardeftab720\partightenfactor0
 
-\f4\fs24 \cf7 \cb8 \
+\f7\fs24 \cf12 \cb13 \
 #include <iostream>\cf4 \
-\cb9 \'a0\
-\cf10 \cb8 int\cf11  \cf12 getValue\cf13 ()\cf4 \
-\cf13 \cb9 \{\cf4 \
-\cf11 \cb8 	\cf10 return\cf11  \cf14 4\cf13 ;\cf4 \
-\cf13 \cb9 \}\cf4 \
-\cb8 \'a0\
-\cf10 \cb9 int\cf11  \cf12 main\cf13 ()\cf4 \
-\cf13 \cb8 \{\cf4 \
-\cf11 \cb9 \'a0\'a0\'a0\'a0\cf14 std\cf11 ::\cf10 cout\cf11  << \cf14 getValue\cf13 ;\cf4 \
-\cb8 \'a0\
-\cf11 \cb9 \'a0\'a0\'a0\'a0\cf10 return\cf11  \cf14 0\cf13 ;\cf4 \
-\cf13 \cb8 \}\cf4 \
+\cb14 \'a0\
+\cf15 \cb13 int\cf16  \cf17 getValue\cf18 ()\cf4 \
+\cf18 \cb14 \{\cf4 \
+\cf16 \cb13 	\cf15 return\cf16  \cf19 4\cf18 ;\cf4 \
+\cf18 \cb14 \}\cf4 \
+\cb13 \'a0\
+\cf15 \cb14 int\cf16  \cf17 main\cf18 ()\cf4 \
+\cf18 \cb13 \{\cf4 \
+\cf16 \cb14 \'a0\'a0\'a0\'a0\cf19 std\cf16 ::\cf15 cout\cf16  << \cf19 getValue\cf18 ;\cf4 \
+\cb13 \'a0\
+\cf16 \cb14 \'a0\'a0\'a0\'a0\cf15 return\cf16  \cf19 0\cf18 ;\cf4 \
+\cf18 \cb13 \}\cf4 \
 \pard\pardeftab720\sa260\partightenfactor0
 
 \f2\fs26 \cf4 \cb3 \
@@ -95,13 +210,13 @@ Use : assert(<condition that will never happen>)\
 \cf4 Let\'92s add some debugging statements to these functions:\
 \pard\pardeftab720\sl300\partightenfactor0
 
-\f4\fs24 \cf4 \cb1 \
+\f7\fs24 \cf4 \cb1 \
 
 \itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth488\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw60\brdrcf16 \clpadl0 \clpadr100 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth488\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw60\brdrcf21 \clpadl0 \clpadr100 \gaph\cellx4320
 \clvertalt \clshdrawnil \clwWidth15963\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl0 \clpadr0 \gaph\cellx8640
 \pard\intbl\itap1\pardeftab720\sl300\qc\partightenfactor0
-\cf15 \cb3 1\cb1 \
+\cf20 \cb3 1\cb1 \
 \cb3 2\cb1 \
 \cb3 3\cb1 \
 \cb3 4\cb1 \
@@ -117,21 +232,21 @@ Use : assert(<condition that will never happen>)\
 \cb3 14\cb1 \
 \cb3 15\cb1 \cell 
 \pard\intbl\itap1\pardeftab720\sl300\partightenfactor0
-\cf7 \cb3 #include <iostream>\cf4 \cb1 \
-\cb9 \'a0\
-\cf10 \cb3 int\cf11  \cf12 getValue\cf13 ()\cf4 \cb1 \
-\cf13 \cb9 \{\cf4 \
-\cf14 \cb3 std\cf11 ::\cf14 cerr\cf11  << \cf17 "getValue() called\\n"\cf13 ;\cf4 \cb1 \
-\cf11 \cb9 	\cf10 return\cf11  \cf14 4\cf13 ;\cf4 \
-\cf13 \cb3 \}\cf4 \cb1 \
-\cb9 \'a0\
-\cf10 \cb3 int\cf11  \cf12 main\cf13 ()\cf4 \cb1 \
-\cf13 \cb9 \{\cf4 \
-\cf14 \cb3 std\cf11 ::\cf14 cerr\cf11  << \cf17 "main() called\\n"\cf13 ;\cf4 \cb1 \
-\cf11 \cb9 \'a0\'a0\'a0\'a0\cf14 std\cf11 ::\cf10 cout\cf11  << \cf14 getValue\cf13 ;\cf4 \
+\cf12 \cb3 #include <iostream>\cf4 \cb1 \
+\cb14 \'a0\
+\cf15 \cb3 int\cf16  \cf17 getValue\cf18 ()\cf4 \cb1 \
+\cf18 \cb14 \{\cf4 \
+\cf19 \cb3 std\cf16 ::\cf19 cerr\cf16  << \cf22 "getValue() called\\n"\cf18 ;\cf4 \cb1 \
+\cf16 \cb14 	\cf15 return\cf16  \cf19 4\cf18 ;\cf4 \
+\cf18 \cb3 \}\cf4 \cb1 \
+\cb14 \'a0\
+\cf15 \cb3 int\cf16  \cf17 main\cf18 ()\cf4 \cb1 \
+\cf18 \cb14 \{\cf4 \
+\cf19 \cb3 std\cf16 ::\cf19 cerr\cf16  << \cf22 "main() called\\n"\cf18 ;\cf4 \cb1 \
+\cf16 \cb14 \'a0\'a0\'a0\'a0\cf19 std\cf16 ::\cf15 cout\cf16  << \cf19 getValue\cf18 ;\cf4 \
 \cb3 \'a0\cb1 \
-\cf11 \cb9 \'a0\'a0\'a0\'a0\cf10 return\cf11  \cf14 0\cf13 ;\cf4 \
-\cf13 \cb3 \}\cf4 \cb1 \cell \lastrow\row
+\cf16 \cb14 \'a0\'a0\'a0\'a0\cf15 return\cf16  \cf19 0\cf18 ;\cf4 \
+\cf18 \cb3 \}\cf4 \cb1 \cell \lastrow\row
 \pard\pardeftab720\sa260\partightenfactor0
 
 \f2\fs26 \cf4 \cb3 \
@@ -143,32 +258,32 @@ Use : assert(<condition that will never happen>)\
 \pard\pardeftab720\sa260\partightenfactor0
 
 \f2\b0\fs26 \cf4 Now we can see that function\'a0
-\f5\i getValue
+\f8\i getValue
 \f2\i0 \'a0was never called. There must be some problem with the code that calls the function. Let\'92s take a closer look at that line:\
 \pard\pardeftab720\sl300\partightenfactor0
 
-\f4\fs24 \cf4 \cb1 \
+\f7\fs24 \cf4 \cb1 \
 
 \itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clcbpat18 \clwWidth344\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw60\brdrcf16 \clpadl0 \clpadr100 \gaph\cellx4320
-\clvertalt \clcbpat18 \clwWidth16109\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl0 \clpadr0 \gaph\cellx8640
+\clvertalt \clcbpat23 \clwWidth344\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw60\brdrcf21 \clpadl0 \clpadr100 \gaph\cellx4320
+\clvertalt \clcbpat23 \clwWidth16109\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl0 \clpadr0 \gaph\cellx8640
 \pard\intbl\itap1\pardeftab720\sl300\qc\partightenfactor0
-\cf15 \cb3 1\cb1 \cell 
+\cf20 \cb3 1\cb1 \cell 
 \pard\intbl\itap1\pardeftab720\sl300\partightenfactor0
-\cf11 \cb3 \'a0\'a0\'a0\'a0\cf14 std\cf11 ::\cf10 cout\cf11  << \cf14 getValue\cf13 ;\cf4 \cb1 \cell \lastrow\row
+\cf16 \cb3 \'a0\'a0\'a0\'a0\cf19 std\cf16 ::\cf15 cout\cf16  << \cf19 getValue\cf18 ;\cf4 \cb1 \cell \lastrow\row
 \pard\pardeftab720\sa260\partightenfactor0
 
 \f2\fs26 \cf4 \cb3 \
 Oh, look, we forgot the parenthesis on the function call. It should be:\
 \pard\pardeftab720\sl300\partightenfactor0
 
-\f4\fs24 \cf4 \cb1 \
+\f7\fs24 \cf4 \cb1 \
 
 \itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
-\clvertalt \clshdrawnil \clwWidth488\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw60\brdrcf16 \clpadl0 \clpadr100 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth488\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrs\brdrw60\brdrcf21 \clpadl0 \clpadr100 \gaph\cellx4320
 \clvertalt \clshdrawnil \clwWidth15963\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl0 \clpadr0 \gaph\cellx8640
 \pard\intbl\itap1\pardeftab720\sl300\qc\partightenfactor0
-\cf15 \cb3 1\cb1 \
+\cf20 \cb3 1\cb1 \
 \cb3 2\cb1 \
 \cb3 3\cb1 \
 \cb3 4\cb1 \
@@ -184,21 +299,21 @@ Oh, look, we forgot the parenthesis on the function call. It should be:\
 \cb3 14\cb1 \
 \cb3 15\cb1 \cell 
 \pard\intbl\itap1\pardeftab720\sl300\partightenfactor0
-\cf7 \cb3 #include <iostream>\cf4 \cb1 \
-\cb9 \'a0\
-\cf10 \cb3 int\cf11  \cf12 getValue\cf13 ()\cf4 \cb1 \
-\cf13 \cb9 \{\cf4 \
-\cf14 \cb3 std\cf11 ::\cf14 cerr\cf11  << \cf17 "getValue() called\\n"\cf13 ;\cf4 \cb1 \
-\cf11 \cb9 	\cf10 return\cf11  \cf14 4\cf13 ;\cf4 \
-\cf13 \cb3 \}\cf4 \cb1 \
-\cb9 \'a0\
-\cf10 \cb3 int\cf11  \cf12 main\cf13 ()\cf4 \cb1 \
-\cf13 \cb9 \{\cf4 \
-\cf14 \cb3 std\cf11 ::\cf14 cerr\cf11  << \cf17 "main() called\\n"\cf13 ;\cf4 \cb1 \
-\cf11 \cb9 \'a0\'a0\'a0\'a0\cf14 std\cf11 ::\cf10 cout\cf11  << \cf12 getValue\cf13 ();\cf11  \cf19 // added parenthesis here\cf4 \
+\cf12 \cb3 #include <iostream>\cf4 \cb1 \
+\cb14 \'a0\
+\cf15 \cb3 int\cf16  \cf17 getValue\cf18 ()\cf4 \cb1 \
+\cf18 \cb14 \{\cf4 \
+\cf19 \cb3 std\cf16 ::\cf19 cerr\cf16  << \cf22 "getValue() called\\n"\cf18 ;\cf4 \cb1 \
+\cf16 \cb14 	\cf15 return\cf16  \cf19 4\cf18 ;\cf4 \
+\cf18 \cb3 \}\cf4 \cb1 \
+\cb14 \'a0\
+\cf15 \cb3 int\cf16  \cf17 main\cf18 ()\cf4 \cb1 \
+\cf18 \cb14 \{\cf4 \
+\cf19 \cb3 std\cf16 ::\cf19 cerr\cf16  << \cf22 "main() called\\n"\cf18 ;\cf4 \cb1 \
+\cf16 \cb14 \'a0\'a0\'a0\'a0\cf19 std\cf16 ::\cf15 cout\cf16  << \cf17 getValue\cf18 ();\cf16  \cf24 // added parenthesis here\cf4 \
 \cb3 \'a0\cb1 \
-\cf11 \cb9 \'a0\'a0\'a0\'a0\cf10 return\cf11  \cf14 0\cf13 ;\cf4 \
-\cf13 \cb3 \}\cf4 \cb1 \cell \lastrow\row
+\cf16 \cb14 \'a0\'a0\'a0\'a0\cf15 return\cf16  \cf19 0\cf18 ;\cf4 \
+\cf18 \cb3 \}\cf4 \cb1 \cell \lastrow\row
 \pard\pardeftab720\sa260\partightenfactor0
 
 \f2\fs26 \cf4 \cb3 \
