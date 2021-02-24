@@ -1,10 +1,11 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2576
+{\rtf1\ansi\ansicpg1252\cocoartf2578
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Arial-BoldMT;\f1\fswiss\fcharset0 ArialMT;\f2\fnil\fcharset0 Menlo-Regular;
-\f3\fnil\fcharset0 Verdana-Bold;\f4\fnil\fcharset0 Verdana;}
+\f3\fnil\fcharset0 Verdana-Bold;\f4\fnil\fcharset0 Verdana;\f5\fmodern\fcharset0 CourierNewPSMT;
+\f6\fswiss\fcharset0 Helvetica-Bold;}
 {\colortbl;\red255\green255\blue255;\red24\green25\blue27;\red255\green255\blue255;\red0\green0\blue0;
-}
+\red135\green135\blue135;}
 {\*\expandedcolortbl;;\cssrgb\c12549\c12941\c14118;\cssrgb\c100000\c100000\c100000;\cssrgb\c0\c0\c0;
-}
+\cssrgb\c60000\c60000\c60000;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
 \deftab720
 \pard\pardeftab720\sl440\partightenfactor0
@@ -41,7 +42,28 @@ $ ulimit -s 16384\
 \pard\pardeftab720\partightenfactor0
 
 \f3 \cf4 \cb3 name hiding\'a0or\'a0shadowing
-\f4\b0\fs26 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \
+\f4\b0\fs26 \
+Each block defines its own scope region. So what happens when we have a variable inside a nested block that has the same name as a variable in an outer block? When this happens, the nested variable \'93hides\'94 the outer variable in areas where they are both in scope. \
+\
+\
 \pard\pardeftab720\partightenfactor0
-\cf4 Each block defines its own scope region. So what happens when we have a variable inside a nested block that has the same name as a variable in an outer block? When this happens, the nested variable \'93hides\'94 the outer variable in areas where they are both in scope. }
+
+\f3\b\fs44\fsmilli22100 \cf0 \cb1 Typedefs and type aliases\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b0\fs22 \cf5 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs26 \cf0 Typedefs
+\f4\b0  allow the programmer to create an alias for a data type, and use the aliased name instead of the actual type name. Typedef literally stands for, \'93type definition\'94.\
+To declare a typedef, simply use the 
+\f5 typedef
+\f4  keyword, followed by the type to alias, followed by the alias name:\
+\pard\pardeftab720\partightenfactor0
+
+\f6\b\fs36 \cf0 Type aliases 
+\f4\b0\fs26 To help address these issues, an improved syntax for 
+\f5 typedefs
+\f4  has been introduced that mimics the way variables are declared. This syntax is called a 
+\f3\b type alias
+\f4\b0 .}
