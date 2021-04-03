@@ -26,22 +26,18 @@ Input:
 
 Output:
 120.00*/
+#include <iostream>
 
-#include<stdio.h>
-int main(){
-
-    int a ;
-    float b;
-    scanf("%d",&a);
-    scanf("%.2f",&b);
-    if(b<a){
-        printf("%.2f",b);
-    }else if(a%5!=0){
-        printf("%.2f",b);
-
-    }else if(a%5==0){
-        float c=(b-a)-0.50;
-        printf("%.2f",c);
-        
-    }
+int main(void) 
+{
+    float amt=0.0;
+    int withdraw=0;
+    
+    scanf("%d%f",&withdraw,&amt);
+    if(withdraw+0.5>amt || withdraw%5!=0)
+        printf("%f",amt);
+    else
+        printf("%.2f",amt-withdraw-0.5);
+	
+	return 0;
 }
