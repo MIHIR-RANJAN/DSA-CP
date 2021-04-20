@@ -8,24 +8,32 @@ int main(){
         cin>>n>>k;
         char s[n];
         cin>>s;
-        cout<<s<<"\n";
-        int flag=0;
-        for(int j=0;j<n;j++){
-            int flag=0;
-            for(int l=j;l<j+k;l++){
-                if(s[l]=='*'){
-                    flag=1;
-                    
+        short flag=0;
+        for(int j=0;j<=(n-k);j++){
+            if(s[j]=='*'){
+                long long int count =0;
+                for(int l=j;l<j+k;l++){
+                    if(s[l]=='*'){
+                        count++;               
+                    }else{
+                        break;
+                    }  
                 }
-                
+                if(count ==k){
+                    flag=1;
+                    break;
+                }else{
+                    j=j+count;
+                }   
             }
-            
+            else{
+                j++;
+            }      
         }
-        if(flag==1){
-            cout<<"true";
+        if(flag==0){
+            cout<<"NO"<<"\n";
         }else{
-            cout<<"false";
+            cout<<"YES"<<"\n";
         }
-    
     }
 }
