@@ -18,7 +18,7 @@ struct node *addbefore(struct node *start,int data,int item); // add before some
 struct node *addatpos(struct node *start,int data,int pos); // add at given position
 struct node *del(struct node *start,int data); // delete
 struct node *reverse(struct node *start); // reverse the LinkedList
-int main()
+main()
 {
     struct node *start=NULL; // at the begining LinkedList is empty
     int choice, data , item ,pos;// choice for switch , data - element already in LinkedList, 
